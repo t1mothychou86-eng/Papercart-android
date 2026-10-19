@@ -1,3 +1,5 @@
+// CN: Restore institutional URLs at the Zotero export boundary.
+import 'package:wispar/cn/institution_access.dart';
 // CN: Papercart tag for items sent to Zotero (A1).
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -195,7 +197,8 @@ class ZoteroService {
   }
 
   static Future<bool> createZoteroItem(String apiKey, String userId,
-      ZoteroCollection targetCollection, Map<String, dynamic> itemData) async {
+      ZoteroCollection targetCollection, Map<String, dynamic> itemData,
+      {http.Client? client}) async {
     final logger = LogsService().logger;
     String url;
 
@@ -210,8 +213,17 @@ class ZoteroService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $apiKey',
     };
-    final body = jsonEncode([itemData]);
-    final response = await http.post(
+    // CN: Normalize at the actual HTTP boundary as well as payload creation.
+    final data = itemData['data'] as Map<String, dynamic>;
+    final exportItem = {
+      ...itemData,
+      'data': {
+        ...data,
+        'url': articleUrlForExport(data['url'] as String? ?? '')
+      }
+    };
+    final body = jsonEncode([exportItem]);
+    final response = await (client?.post ?? http.post)(
       Uri.parse(url),
       headers: headers,
       body: body,
@@ -237,7 +249,8 @@ class ZoteroService {
       String journalTitle,
       DateTime? publishedDate,
       String doi,
-      List<String> issn) async {
+      List<String> issn,
+      {String articleUrl = ''}) async {
     final logger = LogsService().logger;
     String? apiKey = await ZoteroService.loadApiKey();
     String? userId = await ZoteroService.loadUserId();
@@ -266,7 +279,8 @@ class ZoteroService {
             'ISSN':
                 issn.first, // Todo check the format since ISSN is now a list
             'shortTitle': '', //'Short Title',
-            'url': '',
+            'url':
+                articleUrlForExport(articleUrl), // CN: Never export ERSP URLs.
             'accessDate': formatDate(DateTime.now()),
             'archive': '', //'Archive',
             'archiveLocation': '', //'Archive Location',

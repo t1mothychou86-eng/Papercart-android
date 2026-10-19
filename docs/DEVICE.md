@@ -44,3 +44,29 @@ adb install -r build/app/outputs/flutter-apk/app-debug.apk
 - [ ] 退出应用后重新打开，仍能进入主界面。
 
 反馈时记录手机型号、Android 版本、安装方式及以上结果即可；如失败，记录系统提示。无需提供账号、密码或配对码。
+
+## A4 国内机构访问（待用户验证）
+
+开发及沙箱测试已完成；这里所有实测项仍待用户验证。安装 `build/app/outputs/flutter-apk/` 中适合手机 ABI 的 release APK（多数手机使用 `app-arm64-v8a-release.apk`）。设计与假设见 [DESIGN-A4.md](DESIGN-A4.md)。不要提供账号、密码、Cookie 或含认证参数的完整登录 URL；只反馈成功/失败及去除敏感信息的现象。
+
+- [ ] 在“机构访问 / EZproxy”选择页顶部可看到“武汉大学（图书馆 ERSP）”和“系统 VPN（不改写，适用于 aTrust）”；远程 EZproxy 列表加载失败也能选择。引导页同样可选择。
+- [ ] 选择 ERSP，关闭 aTrust/其他 VPN，在校外网络打开文章，进入武大 ERSP 登录页；由用户自行登录，之后可回到原文并看到全文。切换出版商后不重复要求登录。
+- [ ] 完全关闭并重开 App：机构选项保留；记录是否仍需重新登录（WebView Cookie 会话持久化尚未实测）。
+- [ ] 文章内点击链接、返回/前进、打开新窗口、点击 PDF：仍在正确的 ERSP 会话下，没有重复的 `/s/.../G.https` 前缀。认证 POST、跨域认证及跳转须实际确认；子资源依赖 ERSP 改写。
+- [ ] 分别打开 JFE、JF、RFS、JPE、AER 各一篇属于武大订阅范围的文章，逐篇手动点击 PDF 下载，在 App 中打开文件；不可批量或自动下载。填写下表。
+
+| 期刊 | 全文可读 | 手动 PDF 下载/打开 | 问题现象（不含身份凭据） |
+|---|---|---|---|
+| JFE / ScienceDirect | 待验证 | 待验证 | |
+| JF / Wiley | 待验证 | 待验证 | |
+| RFS / OUP | 待验证 | 待验证 | |
+| JPE / UChicago | 待验证 | 待验证 | |
+| AER / AEA | 待验证 | 待验证 | |
+
+- [ ] ERSP 的 `G.http` 写法、查询参数/编码、fragment 和 PDF URL 是否按推导规则工作。非默认端口当前一律回退原网址并提示；不假设网关支持它。
+- [ ] “ERSP 直接打开 DOI”默认开启：检查 doi.org 能否经 ERSP 到达正确全文；若失败，关闭开关再次打开 DOI，检查一次 HEAD 解析出版商地址的回退方式。记录是否遇到 HEAD 不支持、解析失败或多级 DOI 跳转（当前只读一次 Location，不跟随全文）。解析失败应提示并打开原 DOI。
+- [ ] 在文章卡片及文章详情页分别测试分享、复制链接和发送到 Zotero（含默认集合直发及选择集合发送）：链接为出版商原址或原 DOI，不含 ERSP 网关；Zotero URL 字段应非空且为原始文章地址。浏览器跳转到 PDF/登录页不应改变外发文章链接。
+- [ ] 分别切换 ERSP → 系统 VPN → 旧 EZproxy → 无机构，重启后选择仍正确；无机构不应出现 `Nonehttps://...` 拼接。
+- [ ] aTrust 单独验收：先关闭 ERSP（选择“系统 VPN”），按学校指南在系统客户端连接，再在 Papercart 内打开同一文章；对照系统浏览器确认流量确实覆盖 Papercart，并测试全文和手动 PDF。**ERSP 与 aTrust 不要同时使用。** 若只在 aTrust 自带浏览器可用，反馈此现象；不将其视为已验证的系统 VPN 接入。
+
+反馈记录手机型号、Android 版本、APK ABI、网络环境、选中的访问方式和上述结果即可。CARSI / WAYFless 本次未实现。

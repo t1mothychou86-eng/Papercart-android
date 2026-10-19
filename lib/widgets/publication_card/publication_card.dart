@@ -1,3 +1,5 @@
+// CN: Export article links without institutional gateway rewriting.
+import 'package:wispar/cn/institution_access.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -526,6 +528,8 @@ class PublicationCardState extends State<PublicationCard>
         widget.publishedDate,
         widget.doi,
         widget.issn,
+        articleUrl:
+            widget.url, // CN: Original article field, never WebView URL.
       );
 
       return;
@@ -552,6 +556,7 @@ class PublicationCardState extends State<PublicationCard>
       widget.publishedDate,
       widget.doi,
       widget.issn,
+      articleUrl: widget.url, // CN: Original article field, never WebView URL.
     );
   }
 
@@ -604,7 +609,7 @@ class PublicationCardState extends State<PublicationCard>
           contentToCopy = widget.doi;
           break;
         case 'url':
-          contentToCopy = widget.url;
+          contentToCopy = articleUrlForExport(widget.url);
           break;
       }
       await Clipboard.setData(ClipboardData(text: contentToCopy));
@@ -621,7 +626,7 @@ class PublicationCardState extends State<PublicationCard>
     SharePlus.instance.share(
       ShareParams(
         text:
-            '${widget.title}\n\n${widget.url}\n\n\nDOI: ${widget.doi}\n${AppLocalizations.of(context)!.sharedMessage} 👻',
+            '${widget.title}\n\n${articleUrlForExport(widget.url)}\n\n\nDOI: ${widget.doi}\n${AppLocalizations.of(context)!.sharedMessage} 👻',
         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
       ),
     );

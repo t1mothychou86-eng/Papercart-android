@@ -153,7 +153,8 @@ class _InstitutionalSettingsScreenState
         children: [
           ListTile(
             leading: const Icon(Icons.school_outlined),
-            title: Text("EZproxy"),
+            // CN: The selector also supports domestic rule-based access.
+            title: const Text("机构访问 / EZproxy"),
             subtitle: FutureBuilder<String?>(
               future: getInstitutionName(),
               builder: (context, snapshot) {

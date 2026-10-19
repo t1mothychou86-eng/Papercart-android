@@ -1,3 +1,5 @@
+// CN: Rule-based institutional access alongside upstream EZproxy.
+import 'package:wispar/cn/institution_access.dart';
 import 'package:flutter/material.dart';
 import 'package:http/io_client.dart';
 import 'package:wispar/generated_l10n/app_localizations.dart';
@@ -38,6 +40,15 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
   final logger = LogsService().logger;
   final dbHelper = DatabaseHelper();
 
+  InstitutionAccess _institutionAccess = const InstitutionAccess('');
+
+  // CN: Shared entry for initial loads, navigation and user-triggered PDFs.
+  Future<String> _accessUrl(String value) async {
+    final result = await _institutionAccess.open(value);
+    if (result.warning != null) _showSnackBar(result.warning!);
+    return result.url;
+  }
+
   String? _extractedPdfUrl;
   bool _isPdfInAppWebView = false;
   bool _isShowingDownloadOptions = false;
@@ -56,7 +67,7 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
   @override
   void initState() {
     super.initState();
-    _initWebViewSettings();
+    // CN: Initialize settings sequentially with the selected access profile.
     checkUnpaywallAvailability();
 
     pullToRefreshController = io.Platform.isAndroid || io.Platform.isIOS
@@ -89,6 +100,7 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
       javaScriptEnabled: true,
       javaScriptCanOpenWindowsAutomatically: true,
       useOnDownloadStart: true,
+      useShouldOverrideUrlLoading: true, // CN: Route main-frame GET links.
       iframeAllowFullscreen: true,
       userAgent: (_overrideUA && (_customUA?.isNotEmpty ?? false))
           ? _customUA
@@ -114,6 +126,9 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
   }
 
   Future<void> checkUnpaywallAvailability() async {
+    // CN: Load before either publisher or Unpaywall PDF navigation.
+    _institutionAccess = await InstitutionAccess.load();
+    await _initWebViewSettings();
     final prefs = await SharedPreferences.getInstance();
     String unpaywallPrefs = prefs.getString('unpaywall') ?? '1';
 
@@ -144,7 +159,13 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
   // Handles the proxy logic
   Future<void> _initProxyAndLoadUrl() async {
     final prefs = await SharedPreferences.getInstance();
+    // CN: Domestic profiles bypass legacy prefix and knownUrls feedback.
+    if (_institutionAccess.isDomestic) {
+      pdfUrl = await _accessUrl(widget.publicationCard.url);
+      return;
+    }
     String proxyUrlPref = prefs.getString('institution_url') ?? '';
+    if (proxyUrlPref == 'None') proxyUrlPref = '';
     proxyUrlPref = proxyUrlPref.replaceAll('\$@', '');
 
     if (proxyUrlPref.isNotEmpty) {
@@ -226,6 +247,8 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
     );
 
     if (choice == 'unpaywall') {
+      // CN: User-selected OA PDF follows the same access rule.
+      unpaywallPdfUrl = await _accessUrl(unpaywallPdfUrl);
       setState(() {
         pdfUrl = unpaywallPdfUrl;
         isReadyToLoad = true;
@@ -283,11 +306,21 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                 color: Theme.of(context).iconTheme.color,
               ),
               tooltip: AppLocalizations.of(context)!.downloadFoundPdf,
-              onPressed: () {
-                final extractedUri = Uri.parse(_extractedPdfUrl!);
+              onPressed: () async {
+                // CN: PDF navigation must also use the institutional route.
+                final extractedUri =
+                    Uri.parse(await _accessUrl(_extractedPdfUrl!));
+                if (!context.mounted) {
+                  return; // CN: Access resolution can await DOI.
+                }
+                // CN: Publisher detection must recognize an ERSP resource URL.
+                final publisherHost =
+                    Uri.tryParse(originalArticleUrl(extractedUri.toString()))
+                            ?.host ??
+                        '';
                 final isElsevier =
-                    extractedUri.host.contains('sciencedirect-com') ||
-                        extractedUri.host.contains('sciencedirect.com');
+                    publisherHost.contains('sciencedirect-com') ||
+                        publisherHost.contains('sciencedirect.com');
                 if (isElsevier) {
                   webViewController?.loadUrl(
                       urlRequest:
@@ -325,8 +358,9 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                             logger.info(
                                 "Received direct PDF URL from JavaScript: $pdfDirectUrl");
                             await controller.loadUrl(
-                                urlRequest:
-                                    URLRequest(url: WebUri(pdfDirectUrl)));
+                                urlRequest: URLRequest(
+                                    url: WebUri(
+                                        await _accessUrl(pdfDirectUrl))));
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -337,6 +371,22 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                             );
                           },
                         );
+                      },
+                      // CN: Never replay POSTs or rewrite subresources/login pages.
+                      shouldOverrideUrlLoading: (controller, action) async {
+                        final target = action.request.url;
+                        if (_institutionAccess.isDomestic &&
+                            target != null &&
+                            action.isForMainFrame &&
+                            (action.request.method ?? 'GET') == 'GET') {
+                          final routed = await _accessUrl(target.toString());
+                          if (routed != target.toString()) {
+                            await controller.loadUrl(
+                                urlRequest: URLRequest(url: WebUri(routed)));
+                            return NavigationActionPolicy.CANCEL;
+                          }
+                        }
+                        return NavigationActionPolicy.ALLOW;
                       },
                       onLoadStart: (controller, url) {
                         setState(() {
@@ -358,6 +408,14 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                           return false;
                         }
 
+                        // CN: Domestic popups stay in the same institutional session.
+                        if (_institutionAccess.isDomestic) {
+                          await controller.loadUrl(
+                              urlRequest: URLRequest(
+                                  url: WebUri(await _accessUrl(
+                                      newWindowUri.toString()))));
+                          return true;
+                        }
                         logger.info(
                             'Intercepted new window: ${newWindowUri.toString()}');
 
@@ -401,6 +459,8 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                       },
                       onReceivedServerTrustAuthRequest:
                           (controller, challenge) async {
+                        // CN: Domestic sessions require platform certificate validation.
+                        if (_institutionAccess.isDomestic) return null;
                         return ServerTrustAuthResponse(
                             action: ServerTrustAuthResponseAction.PROCEED);
                       },
@@ -455,8 +515,10 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                           _extractPdfLink(controller);
                         }
 
+                        // CN: Malformed fallback URLs must not throw in load callbacks.
                         final baseUrl =
-                            Uri.parse(widget.publicationCard.url).host;
+                            Uri.tryParse(widget.publicationCard.url)?.host ??
+                                '';
                         final knownUrlEntry =
                             await dbHelper.getKnownUrlByString(baseUrl);
 
@@ -499,8 +561,8 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                         }
 
                         // --- Wiley-specific JavaScript injection for download ---
-                        if (url
-                                .toString()
+                        // CN: Restore the host for upstream Wiley PDF detection.
+                        if (originalArticleUrl(url.toString())
                                 .contains('onlinelibrary.wiley.com') &&
                             (url.toString().contains('/doi/pdfviewer/') ||
                                 url.toString().contains('/doi/epdf/'))) {
@@ -663,8 +725,7 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
         _currentWebViewCookies = cookies
             .map((cookie) => '${cookie.name}=${cookie.value}')
             .join('; ');
-        logger.info(
-            'Extracted cookies for ${currentUrl.host}: $_currentWebViewCookies');
+        // CN: Do not log authentication cookies.
       } else {
         _currentWebViewCookies = null;
         logger.info('No cookies found for ${currentUrl.host}');
@@ -784,6 +845,11 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
 
   Future<void> _showDownloadOptions(
       BuildContext context, Uri downloadUri) async {
+    // CN: Both manual download choices receive the access URL.
+    downloadUri = Uri.parse(await _accessUrl(downloadUri.toString()));
+    if (!context.mounted) {
+      return; // CN: The caller may close during DOI resolution.
+    }
     if (_isShowingDownloadOptions) {
       logger.info(
           'Download options already showing or recently shown. Debouncing.');
@@ -837,10 +903,15 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                           await webViewController?.getUrl();
                       String linkToProcess =
                           _extractedPdfUrl ?? downloadUri.toString();
+                      // CN: Apply publisher path corrections before ERSP rewriting.
+                      if (_institutionAccess.isDomestic) {
+                        linkToProcess = originalArticleUrl(linkToProcess);
+                      }
 
                       Uri finalDownloadUri = Uri.parse(linkToProcess);
 
-                      if (currentWebViewUrl != null &&
+                      if (!_institutionAccess.isDomestic &&
+                          currentWebViewUrl != null &&
                           (finalDownloadUri.host.contains('wiley-com') ||
                               finalDownloadUri.host.contains('wiley.com') ||
                               finalDownloadUri.host
@@ -893,6 +964,10 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                         }
                       }
 
+                      // CN: Route only this user-triggered PDF request.
+                      finalDownloadUri = Uri.parse(
+                          await _accessUrl(finalDownloadUri.toString()));
+
                       Map<String, String> headers = {
                         //'Host': downloadUri.host,
                         'Accept':
@@ -932,24 +1007,28 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
                       }
 
                       if (_currentWebViewCookies != null &&
-                          _currentWebViewCookies!.isNotEmpty) {
+                          _currentWebViewCookies!.isNotEmpty &&
+                          // CN: Never send gateway cookies to an original-URL fallback.
+                          (!_institutionAccess.isDomestic ||
+                              currentWebViewUrl?.origin ==
+                                  finalDownloadUri.origin)) {
                         headers['Cookie'] = _currentWebViewCookies!;
                         logger.info(
                             'Attaching cookies to HTTP download request.');
-                        logger
-                            .info('Cookie Header: ${_currentWebViewCookies!}');
+                        // CN: Cookie values must not enter logs.
                       } else {
                         logger.warning(
                             'No cookies available for HTTP download. This might fail for authenticated content.');
                       }
 
                       logger.info('HTTP Request URL: $finalDownloadUri');
-                      logger.info(
-                          'Full HTTP Request Headers being sent: $headers');
+                      // CN: Request headers may contain authentication cookies.
 
                       final io.HttpClient innerHttpClient = io.HttpClient()
                         ..badCertificateCallback =
                             ((io.X509Certificate cert, String host, int port) {
+                          // CN: Never bypass TLS validation for domestic access.
+                          if (_institutionAccess.isDomestic) return false;
                           final configuredProxyHost =
                               Uri.tryParse(proxyUrl)?.host;
 
@@ -980,7 +1059,7 @@ class ArticleWebsiteState extends State<ArticleWebsite> {
 
                       logger
                           .info('HTTP Response Status: ${response.statusCode}');
-                      logger.info('HTTP Response Headers: ${response.headers}');
+                      // CN: Response headers may contain Set-Cookie; do not log them.
 
                       if (response.statusCode == 200 &&
                           response.bodyBytes.isNotEmpty &&

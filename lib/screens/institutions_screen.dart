@@ -1,3 +1,5 @@
+// CN: Domestic options stay available independently of the EZproxy service.
+import 'package:wispar/cn/institution_choices.dart';
 import 'package:flutter/material.dart';
 import '../generated_l10n/app_localizations.dart';
 import '../services/libproxydb_api.dart';
@@ -23,6 +25,7 @@ class _InstitutionScreenState extends State<InstitutionScreen> {
   void fetchProxies() async {
     try {
       List<ProxyData> proxies = await ProxyService.fetchProxies();
+      if (!mounted) return;
       setState(() {
         // Appends "No institution" at the top of the proxy list
         proxies = [
@@ -76,6 +79,7 @@ class _InstitutionScreenState extends State<InstitutionScreen> {
               ),
             ),
           ),
+          DomesticInstitutionChoices(onSelected: onInstitutionSelected),
           Expanded(
             child: ListView.builder(
               itemCount: filteredProxies.length,

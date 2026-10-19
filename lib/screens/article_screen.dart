@@ -1,3 +1,5 @@
+// CN: Export article links without institutional gateway rewriting.
+import 'package:wispar/cn/institution_access.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wispar/generated_l10n/app_localizations.dart';
@@ -139,7 +141,7 @@ class ArticleScreenState extends State<ArticleScreen> {
     try {
       await SharePlus.instance.share(ShareParams(
         text:
-            '${_showTranslatedTitle ? _accumulatedTranslatedTitle : widget.title}\n\n${widget.url}\n\nDOI: ${widget.doi}\n${AppLocalizations.of(context)!.sharedMessage} 👻',
+            '${_showTranslatedTitle ? _accumulatedTranslatedTitle : widget.title}\n\n${articleUrlForExport(widget.url)}\n\nDOI: ${widget.doi}\n${AppLocalizations.of(context)!.sharedMessage} 👻',
         sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
       ));
     } catch (e, stackTrace) {
@@ -453,7 +455,7 @@ class ArticleScreenState extends State<ArticleScreen> {
           contentToCopy = widget.doi;
           break;
         case 'url':
-          contentToCopy = widget.url;
+          contentToCopy = articleUrlForExport(widget.url);
           break;
       }
 
@@ -1047,6 +1049,8 @@ class ArticleScreenState extends State<ArticleScreen> {
         widget.publishedDate,
         widget.doi,
         widget.issn,
+        articleUrl:
+            widget.url, // CN: Original article field, never WebView URL.
       );
 
       return;
@@ -1069,6 +1073,7 @@ class ArticleScreenState extends State<ArticleScreen> {
       widget.publishedDate,
       widget.doi,
       widget.issn,
+      articleUrl: widget.url, // CN: Original article field, never WebView URL.
     );
   }
 }
