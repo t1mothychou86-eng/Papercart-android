@@ -55,9 +55,9 @@
 
 | 事项 | 何时需要 |
 |---|---|
-| GitHub 仓库：建议在 Wispar 页面点 **Fork**，并改成新名字。fork 关系便于给上游提 PR；fork 只能是公开仓库，符合 GPL 的要求 | 推送前 |
-| 推送权限：为新仓库添加部署密钥（Deploy key） | 推送前 |
-| App 名称和包名 | A1 |
+| ~~GitHub 仓库~~ | 已完成：t1mothychou86-eng/papercart-android（fork 自 Wispar） |
+| ~~推送权限~~ | 已完成：部署密钥 |
+| ~~App 名称和包名~~ | 已定：名称 **Papercart**，包名 `io.github.t1mothychou86.papercart` |
 | 学校名称（用于查找 CARSI entityID）、一个 WebVPN 网址样例 | A4 |
 | 安卓真机测试：安装 APK、配合登录测试 | A0 起 |
 
