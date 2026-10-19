@@ -1,3 +1,4 @@
+// CN: Papercart tag for items sent to Zotero (A1).
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -276,7 +277,7 @@ class ZoteroService {
             'creators': authorsData,
             'collections': [targetCollection.key],
             'tags': [
-              {'tag': 'Wispar'},
+              {'tag': 'Papercart'},
             ],
             'relations': {},
           }

@@ -21,7 +21,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "app.wispar.wispar"
+    // CN: Papercart Android identity (A1).
+    namespace "io.github.t1mothychou86.papercart"
     compileSdkVersion 36
     ndkVersion "29.0.14206865"
 
@@ -40,7 +41,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "app.wispar.wispar"
+        // CN: Keep the fork separate from upstream installs.
+        applicationId "io.github.t1mothychou86.papercart"
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()

@@ -1,3 +1,4 @@
+// CN: Papercart display branding and fork attribution (A1).
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
@@ -39,8 +40,8 @@ Future<void> showNewJournalArticlesNotification() async {
 
   AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails(
-    'wispar_channel',
-    'Wispar Updates',
+    'papercart_channel',
+    'Papercart Updates',
     channelDescription:
         'Notification when new articles from followed journals are available',
     importance: Importance.high,
@@ -70,8 +71,8 @@ Future<void> showNewQueryArticlesNotification() async {
 
   AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails(
-    'wispar_channel',
-    'Wispar Updates',
+    'papercart_channel',
+    'Papercart Updates',
     channelDescription:
         'Notification when new articles from saved queries are available',
     importance: Importance.high,

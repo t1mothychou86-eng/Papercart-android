@@ -1,3 +1,4 @@
+// CN: Papercart display branding and fork attribution (A1).
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -54,7 +55,7 @@ void main() async {
       size: Size(900, 700),
       minimumSize: Size(400, 600),
       center: true,
-      title: "Wispar",
+      title: "Papercart",
     );
 
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
@@ -79,7 +80,7 @@ void main() async {
 }
 
 class Wispar extends StatefulWidget {
-  static const title = 'Wispar';
+  static const title = 'Papercart';
 
   const Wispar({super.key});
 

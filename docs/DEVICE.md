@@ -1,3 +1,6 @@
+<!-- CN: A1 current Android identity; A0 results remain historical. -->
+当前 A1 APK 名称为 Papercart，包名为 `io.github.t1mothychou86.papercart`。以下 A0 说明记录改名前的历史结果。
+
 # A0 安卓真机安装与验证
 
 A0 使用上游原样代码，安装后名称仍为 Wispar，包名为 `app.wispar.wispar`；改名属于 A1。此处仅用于本地验证。APK 是否已生成、实际大小和构建结果见 [A0-REPORT.md](A0-REPORT.md)。

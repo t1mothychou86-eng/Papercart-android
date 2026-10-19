@@ -1,4 +1,5 @@
 {
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
     "save": "保存",
     "home": "ホーム",
     "@home": {
@@ -48,7 +49,7 @@
     "@download": {
         "description": "The verb to download, without the 'to'."
     },
-    "welcomeWispar": "Wisparにようこそ！",
+    "welcomeWispar": "Papercartにようこそ！",
     "articles": "論文",
     "@articles": {
         "description": "As in scientific articles."
@@ -187,7 +188,7 @@
     "zoteroNewCollection": "新着コレクション",
     "databaseExported": "データベースのエクスポートに成功しました！",
     "databaseExportFailed": "データベースのエクスポートに失敗しました。",
-    "databaseConflictTitle": "既存のWisparデータが見つかりました。",
+    "databaseConflictTitle": "既存のPapercartデータが見つかりました。",
     "showOriginal": "原文を表示",
     "pleaseEnterAiAPIKey": "{providerName}のAPIキーを入力してください",
     "cloudSync": "クラウド同期",
@@ -235,7 +236,7 @@
     "sort": "並べ替え",
     "viewHiddenArticles": "非表示の出版物を表示する",
     "unhideArticle": "この出版物を非表示にする",
-    "zoteroPermissions1": "Wisparの連携機能をご利用いただくには、Zoteroアカウントへの読み取りおよび書き込みアクセス権が必要です。",
+    "zoteroPermissions1": "Papercartの連携機能をご利用いただくには、Zoteroアカウントへの読み取りおよび書き込みアクセス権が必要です。",
     "zoteroEnterKey": "APIキーを入力してください",
     "@zoteroEnterKey": {
         "description": "Hint text shown in the text field where users can enter their Zotero API key."
@@ -254,7 +255,7 @@
     "aiCustomPrompts": "カスタム翻訳プロンプト",
     "prompt": "プロンプト",
     "downloadFailedInAppViewer": "アプリ内で開くことができませんでした。ウェブサイトのPDFダウンロードボタンを試すか、外部PDFビューアを選択してください。",
-    "downloadToAppSubtitle": "Wispar内でPDFを直接ダウンロードして閲覧できるようにし、統合性を高めます。",
+    "downloadToAppSubtitle": "Papercart内でPDFを直接ダウンロードして閲覧できるようにし、統合性を高めます。",
     "moreJournals": "その他のジャーナル",
     "includeKeywords": "キーワードを含める",
     "excludeKeywords": "キーワードを除外する",
@@ -333,7 +334,7 @@
     "@homeFeedEmpty": {
         "description": "The message shown when the feed in the home screen is empty."
     },
-    "sharedMessage": "Wisparアプリ経由で共有されました",
+    "sharedMessage": "Papercartアプリ経由で共有されました",
     "@sharedMessage": {
         "description": "Default sharing text."
     },
@@ -470,7 +471,7 @@
     },
     "noResponseFromAI": "AIからの応答がありませんでした。",
     "loginToSyncDevices": "ログインして、すべてのデバイス間でデータを同期してください",
-    "syncLongDescription": "Wisparでは、デバイス間でデータの一貫性を保つためのオプションの同期サービスを提供しています。Wispar Sync（プライバシーポリシーをご参照ください）をご利用いただくか、データを完全に管理するためにセルフホスティング（ドキュメントをご参照ください）を行うことができます。また、同期をスキップして続行することも可能です。",
+    "syncLongDescription": "Papercartでは、デバイス間でデータの一貫性を保つためのオプションの同期サービスを提供しています。Wispar Sync（プライバシーポリシーをご参照ください）をご利用いただくか、データを完全に管理するためにセルフホスティング（ドキュメントをご参照ください）を行うことができます。また、同期をスキップして続行することも可能です。",
     "documentation": "ドキュメント",
     "syncNow": "今すぐ同期",
     "syncing": "同期中...",
@@ -503,7 +504,7 @@
     "storagePermissionDenied": "アクセスが拒否されました。",
     "exportingDatabase": "データベースのエクスポート中です。しばらくお待ちください。",
     "databaseMoveFailed": "データベースファイルを移動できません：{error}",
-    "databaseConflictMessage": "選択したフォルダ内にWisparのデータが見つかりました。既存のファイルを使用しますか、それとも現在のデータベースで上書きしますか？",
+    "databaseConflictMessage": "選択したフォルダ内にPapercartのデータが見つかりました。既存のファイルを使用しますか、それとも現在のデータベースで上書きしますか？",
     "useExistingFiles": "既存のファイルを使用する",
     "overwriteFiles": "現在のデータベースで上書きする",
     "horizontal": "横向き",

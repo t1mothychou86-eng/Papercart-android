@@ -1,3 +1,4 @@
+// CN: Papercart display branding and fork attribution (A1).
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -64,7 +65,7 @@ class IntroScreenState extends State<IntroScreen> {
               children: [
                 const SizedBox(height: 20),
                 Image.asset(
-                  'assets/icon/icon.png',
+                  'assets/cn/papercart.png',
                   width: 100,
                   height: 100,
                   fit: BoxFit.contain,

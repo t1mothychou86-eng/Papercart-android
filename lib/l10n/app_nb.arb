@@ -1,4 +1,5 @@
 {
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
   "home": "Hjem",
   "@home": {},
   "favorites": "Favoritter",
@@ -75,7 +76,7 @@
   "@sendToZotero": {},
   "zoteroSettings": "Zotero-innstillinger",
   "@zoteroSettings": {},
-  "sharedMessage": "Delt via Wispar-programmet",
+  "sharedMessage": "Delt via Papercart-programmet",
   "@sharedMessage": {
     "description": "Default sharing text."
   },
@@ -89,7 +90,7 @@
   },
   "zoteroCreateKey": "Opprett en ny API-nøkkel",
   "@zoteroCreateKey": {},
-  "zoteroPermissions1": "Wispar trenger både lese- og skrivetilgang til din Zotero-konto for å nye godt av integrasjonen.",
+  "zoteroPermissions1": "Papercart trenger både lese- og skrivetilgang til din Zotero-konto for å nye godt av integrasjonen.",
   "@zoteroPermissions1": {},
   "zoteroPermissions2": "Når du oppretter en ny Zotero-API-nøkkel må du velge både «Tillat bibliotekstilgang» og «Tillat skrivetilgang».",
   "@zoteroPermissions2": {},

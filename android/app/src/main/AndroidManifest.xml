@@ -7,10 +7,11 @@
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" tools:node="remove" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove" />
+    <!-- CN: Papercart branding; upstream attribution is in About. -->
     <application
         tools:replace="android:label"
         android:allowBackup="false"
-        android:label="Wispar"
+        android:label="Papercart"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">

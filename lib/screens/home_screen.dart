@@ -590,7 +590,8 @@ class HomeScreenState extends State<HomeScreen> {
                 ),
           IconButton(
             icon: Image.asset(
-              'assets/icon/icon.png',
+              // CN: Show the fork icon in the home header.
+              'assets/cn/papercart.png',
               width: 28,
               height: 28,
             ),

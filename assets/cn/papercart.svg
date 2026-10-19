@@ -1,0 +1,11 @@
+<!-- CN: Original Papercart artwork, A1, 2026-10-19. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<path fill="#143d46" d="M0 0H100V100H0Z"/>
+<polygon fill="#fffaeb" points="36,22 56,22 65,31 65,58 36,58"/>
+<polygon fill="#f2b85c" points="56,22 56,32 65,32"/>
+<polygon fill="#143d46" points="41,38 59,38 59,41 41,41"/>
+<polygon fill="#143d46" points="41,45 57,45 57,48 41,48"/>
+<polygon fill="#f2b85c" points="23,46 29,46 36,64 65,64 69,53 74,55 69,69 32,69 25,51 23,51"/>
+<circle fill="#f2b85c" cx="39" cy="76" r="4"/>
+<circle fill="#f2b85c" cx="62" cy="76" r="4"/>
+</svg>

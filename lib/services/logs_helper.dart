@@ -1,3 +1,4 @@
+// CN: Papercart logger and exported log filenames (A1).
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -11,7 +12,7 @@ class LogsService {
   static final LogsService _instance = LogsService._internal();
   factory LogsService() => _instance;
 
-  final Logger _logger = Logger('Wispar');
+  final Logger _logger = Logger('Papercart');
   final ValueNotifier<List<LogRecord>> logsNotifier = ValueNotifier([]);
 
   LogsService._internal() {
@@ -60,7 +61,7 @@ class LogsService {
 
       final String? outputPath = (await FilePicker.saveFile(
         dialogTitle: AppLocalizations.of(context)!.selectLogsLocation,
-        fileName: 'wispar_logs.txt',
+        fileName: 'papercart_logs.txt',
         bytes: logBytes,
       ))
           ?.path;
@@ -98,7 +99,7 @@ class LogsService {
       }
 
       final tempDir = await getTemporaryDirectory();
-      final tempFile = File('${tempDir.path}/wispar_logs.txt');
+      final tempFile = File('${tempDir.path}/papercart_logs.txt');
       await tempFile.writeAsString(buffer.toString());
 
       await SharePlus.instance.share(ShareParams(

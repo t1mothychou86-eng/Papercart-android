@@ -1,3 +1,21 @@
+# Papercart
+
+Papercart 是 [Wispar（Scriptbash，GPL-3.0）](https://github.com/Scriptbash/Wispar) 的 fork。
+本项目遵循 [GNU GPL-3.0](LICENSE)，保留上游作者署名及版权声明；发布 APK 时须同时公开对应版本源码。
+
+<!-- CN: Fork branding and compliance notice added for A1, 2026-10-19. -->
+Android 名称：**Papercart**；包名：`io.github.t1mothychou86.papercart`。
+本 fork 目前仅构建 debug APK，不提供商店或签名 release 发布。
+上游 CNAME 已改名为 `CNAME.upstream-disabled`；上游构建、官网部署和发布 workflow
+已改名为 `.yml.disabled`，不会被 GitHub Actions 识别。下方为保留的上游项目介绍，
+其中商店、赞助和服务链接均属于 Wispar，并非 Papercart 发布渠道。
+
+图标由 `python3 scripts/generate_cn_icon.py` 生成，再运行
+`dart run flutter_launcher_icons -f flutter_launcher_icons_cn.yaml` 生成 Android 资源。
+图标为本 fork 原创的纸张与小车图形，无需新增依赖。
+
+---
+
 <p align="center">
   <img alt="Wispar" src="https://github.com/Scriptbash/Wispar/blob/main/assets/icon/icon.png?raw=true" width="100">
 </p>

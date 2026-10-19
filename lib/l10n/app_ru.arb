@@ -1,4 +1,5 @@
 {
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
     "download": "Скачать",
     "@download": {
         "description": "The verb to download, without the 'to'."
@@ -17,7 +18,7 @@
     },
     "saveSettings": "Сохранить настройки",
     "setupAlmostSet": "Всё готово!… Почти!",
-    "welcomeWispar": "Вас приветствует Wispar!",
+    "welcomeWispar": "Вас приветствует Papercart!",
     "appDescription": "Ваше открытое приложение для отслеживания научной литературы. Давайте быстро настроим всё!",
     "setupInstitutionalAccess": "Настроить институциональный доступ",
     "setupInstitutionalAccessLong": "Выберите EZproxy вашего учреждения для доступа к их журнальным подпискам. Это устранит необходимость в VPN или локальном доступе.",
@@ -202,14 +203,14 @@
     "@homeFeedEmpty": {
         "description": "The message shown when the feed in the home screen is empty."
     },
-    "sharedMessage": "Поделиться через Wispar",
+    "sharedMessage": "Поделиться через Papercart",
     "@sharedMessage": {
         "description": "Default sharing text."
     },
     "shareArticle": "Поделиться статьей",
     "sendToZotero": "Отправить в Zotero",
     "zoteroSettings": "Настройки Zotero",
-    "zoteroPermissions1": "Для интеграции Wispar нужен доступ на чтение и запись к вашему Zotero.",
+    "zoteroPermissions1": "Для интеграции Papercart нужен доступ на чтение и запись к вашему Zotero.",
     "zoteroPermissions2": "При создании API-ключа Zotero выберите «Доступ к библиотеке» и «Разрешение на запись».",
     "zoteroPermissions3": "Скопируйте ключ API и вставьте ниже.",
     "zoteroCreateKey": "Создать новый API-ключ",
@@ -327,7 +328,7 @@
     "notificationContent": "Доступны новые статьи!",
     "notificationTitleJournal": "Журналы обновлены",
     "notificationTitleQuery": "Запросы обновлены",
-    "fgNotificationContent": "Wispar работает на фоне для обновления ваших журналов",
+    "fgNotificationContent": "Papercart работает на фоне для обновления ваших журналов",
     "fgNotificationTitle": "Служба обновления в фоне",
     "system": "Система",
     "concurrentFetches": "Одновременные запросы API: {number}",
@@ -370,7 +371,7 @@
     "downloadStarting": "Скачивание началось.",
     "downloadFoundPdf": "Скачать найденный PDF",
     "downloadToApp": "Скачать в приложении",
-    "downloadToAppSubtitle": "Скачать и открыть PDF прямо в Wispar для лучшей интеграции.",
+    "downloadToAppSubtitle": "Скачать и открыть PDF прямо в Papercart для лучшей интеграции.",
     "noAiApiKeySetError": "API-ключ ИИ не настроен. Настройте в настройках.",
     "translationFailed": "Ошибка перевода",
     "showTranslation": "Показать перевод",
@@ -434,8 +435,8 @@
     "movingDatabase": "Перемещение файлов базы данных. Пожалуйста, подождите.",
     "databaseMoved": "Файлы базы данных перемещены!",
     "databaseMoveFailed": "Не удалось переместить файлы базы данных: {error}",
-    "databaseConflictTitle": "Найдены данные Wispar.",
-    "databaseConflictMessage": "Данные Wispar найдены в папке. Использовать существующие файлы или заменить текущей базой?",
+    "databaseConflictTitle": "Найдены данные Papercart.",
+    "databaseConflictMessage": "Данные Papercart найдены в папке. Использовать существующие файлы или заменить текущей базой?",
     "useExistingFiles": "Использовать существующие файлы",
     "overwriteFiles": "Заменить текущей базой данных",
     "overrideUserAgent": "Переопределить User Agent",
@@ -501,7 +502,7 @@
     "previousMatch": "Предыдущее совпадение",
     "zoteroError": "Не удаётся отправить статью в Zotero. Проверьте логи для получения дополнительной информации.",
     "loginToSyncDevices": "Войдите, чтобы синхронизировать между устройствами",
-    "syncLongDescription": "Wispar предлагает опциональную службу синхронизации для сохранения данных一致ными на всех устройствах. Вы можете использовать Wispar Sync (см. Политику конфиденциальности) или самостоятельно хостить для полного контроля над данными (см. Документацию). Также можете пропустить синхронизацию и продолжить.",
+    "syncLongDescription": "Papercart предлагает опциональную службу синхронизации для сохранения данных一致ными на всех устройствах. Вы можете использовать Wispar Sync (см. Политику конфиденциальности) или самостоятельно хостить для полного контроля над данными (см. Документацию). Также можете пропустить синхронизацию и продолжить.",
     "documentation": "Документация",
     "cloudSync": "Облачная синхронизация",
     "selfHosted": "Самостоятельный хостинг",

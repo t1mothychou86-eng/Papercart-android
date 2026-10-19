@@ -1,11 +1,12 @@
 {
-    "welcomeWispar": "Willkommen bei Wispar!",
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
+    "welcomeWispar": "Willkommen bei Papercart!",
     "setupInstitutionalAccess": "Einrichtung des institutionellen Zugangs",
     "setupInstitutionalAccessLong": "Wählen Sie den EZproxy Ihrer Einrichtung aus, um Zugriff auf deren Zeitschriftenabonnements zu erhalten. Dadurch ist kein VPN oder lokaler Zugriff mehr erforderlich.",
     "setupSelectInstitution": "Meine Einrichtung auswählen",
     "setupSelectedInstitution": "Sie haben ausgewählt:",
     "setupLinkZotero": "Link Zotero",
-    "setupZoteroLong": "Senden Sie Publikationen direkt an Ihre Zotero-Bibliothek. Sie werden einer speziellen Wispar-Sammlung hinzugefügt.",
+    "setupZoteroLong": "Senden Sie Publikationen direkt an Ihre Zotero-Bibliothek. Sie werden einer speziellen Papercart-Sammlung hinzugefügt.",
     "setupLinkMyZotero": "Mein Zotero-Konto verknüpfen",
     "setupOtherSettings": "Weitere Einstellungen",
     "setupOtherSettingsLong": "Weitere Einstellungen sind im Einstellungsmenü der App verfügbar. Rufen Sie es über den Startbildschirm auf, indem Sie auf das Menü mit den drei Punkten in der oberen rechten Ecke tippen.",
@@ -21,7 +22,7 @@
     "notificationContent": "Neue Artikel sind verfügbar!",
     "notificationTitleJournal": "Zeitschriften wurden aktualisiert",
     "notificationTitleQuery": "Abfragen wurden aktualisiert",
-    "fgNotificationContent": "Wispar läuft im Hintergrund, um Ihre Journale zu aktualisieren",
+    "fgNotificationContent": "Papercart läuft im Hintergrund, um Ihre Journale zu aktualisieren",
     "fgNotificationTitle": "Hintergrund-Aktualisierungsdienst",
     "home": "Startseite",
     "@home": {
@@ -282,7 +283,7 @@
     "@homeFeedEmpty": {
         "description": "The message shown when the feed in the home screen is empty."
     },
-    "sharedMessage": "Über die Wispar-App geteilt",
+    "sharedMessage": "Über die Papercart-App geteilt",
     "@sharedMessage": {
         "description": "Default sharing text."
     },
@@ -294,7 +295,7 @@
     "unhideArticle": "Diese Veröffentlichung einblenden",
     "sendToZotero": "An Zotero senden",
     "zoteroSettings": "Zotero Einstellungen",
-    "zoteroPermissions1": "Wispar benötigt sowohl Lese- als auch Schreibzugriff auf dein Zotero-Konto, um die Integration nutzen zu können.",
+    "zoteroPermissions1": "Papercart benötigt sowohl Lese- als auch Schreibzugriff auf dein Zotero-Konto, um die Integration nutzen zu können.",
     "zoteroPermissions2": "Wenn du einen neuen Zotero-API-Schlüssel erstellst, musst ud sowohl „Bibliothekszugriff zulassen“ als auch „Schreibzugriff zulassen“ auswählen.",
     "zoteroPermissions3": "Sobald der API-Schlüssel erstellt wurde, kopiere den Wert und füge ihn in das untenstehende Textfeld ein.",
     "zoteroCreateKey": "Einen neuen API-Schlüssel erstellen",
@@ -432,7 +433,7 @@
     "downloadStarting": "Download startet.",
     "downloadFoundPdf": "Gefundenes PDF herunterladen",
     "downloadToApp": "Download in der App",
-    "downloadToAppSubtitle": "Versuche, die PDF-Datei direkt in Wispar herunterzuladen und anzuzeigen, um eine bessere Integration zu erzielen.",
+    "downloadToAppSubtitle": "Versuche, die PDF-Datei direkt in Papercart herunterzuladen und anzuzeigen, um eine bessere Integration zu erzielen.",
     "showPublicationCount": "Anzahl der Veröffentlichungen anzeigen",
     "graphicalAbstract": "Grafische Zusammenfassung",
     "openExternalApp": "In externer App öffnen",
@@ -442,8 +443,8 @@
     "movingDatabase": "Verschieben der Datenbankdateien. Bitte warten.",
     "databaseMoved": "Die Datenbankdateien wurden erfolgreich verschoben!",
     "databaseMoveFailed": "Die Datenbankdateien können nicht verschoben werden: {error}",
-    "databaseConflictTitle": "Vorhandene Wispar-Daten gefunden.",
-    "databaseConflictMessage": "Wispar-Daten wurden im ausgewählten Ordner gefunden. Möchten Sie die vorhandenen Dateien verwenden oder sie mit der aktuellen Datenbank überschreiben?",
+    "databaseConflictTitle": "Vorhandene Papercart-Daten gefunden.",
+    "databaseConflictMessage": "Papercart-Daten wurden im ausgewählten Ordner gefunden. Möchten Sie die vorhandenen Dateien verwenden oder sie mit der aktuellen Datenbank überschreiben?",
     "useExistingFiles": "Vorhandene Dateien verwenden",
     "overwriteFiles": "Mit aktueller Datenbank überschreiben",
     "numberPublications": "{count, plural, =0{Keine Veröffentlichungen} =1{1 Veröffentlichung} other{{count} Veröffentlichungen}}",

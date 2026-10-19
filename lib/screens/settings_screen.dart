@@ -1,5 +1,8 @@
+// CN: Papercart display branding and fork attribution (A1).
 import 'dart:io';
 import 'package:flutter/material.dart';
+// CN: Keep fork credits separate from upstream settings.
+import 'package:wispar/cn/fork_credits.dart';
 import 'package:wispar/generated_l10n/app_localizations.dart';
 import 'package:wispar/screens/zotero_settings_screen.dart';
 import 'package:wispar/screens/api_settings_screen.dart';
@@ -191,20 +194,21 @@ class SettingsScreenState extends State<SettingsScreen> {
           final build = appInfo[1];
           showAboutDialog(
             context: context,
-            applicationName: "Wispar",
-            applicationIcon: Image.asset('assets/icon/icon.png', width: 50),
+            applicationName: "Papercart",
+            applicationIcon: Image.asset('assets/cn/papercart.png', width: 50),
             applicationVersion: "Version $version (Build $build)",
             children: [
+              const ForkCredits(),
               TextButton.icon(
                 onPressed: () => launchUrl(
-                    Uri.parse('https://github.com/Scriptbash/Wispar'),
+                    Uri.parse('https://github.com/t1mothychou86-eng/Papercart-android'),
                     mode: LaunchMode.platformDefault),
                 icon: const Icon(Icons.code),
                 label: Text(AppLocalizations.of(context)!.sourceCode),
               ),
               TextButton.icon(
                 onPressed: () => launchUrl(
-                    Uri.parse('https://github.com/Scriptbash/Wispar/issues'),
+                    Uri.parse('https://github.com/t1mothychou86-eng/Papercart-android/issues'),
                     mode: LaunchMode.platformDefault),
                 icon: const Icon(Icons.bug_report_outlined),
                 label: Text(AppLocalizations.of(context)!.reportIssue),

@@ -1,4 +1,5 @@
 {
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
     "settings": "Ajustes",
     "@settings": {
         "description": "The settings option menu button and the app bar title when in the settings screen."
@@ -59,7 +60,7 @@
     "@forwardedproxy": {
         "description": "Snackbar shown when a request is intercepted and sent through the user's institution EZproxy."
     },
-    "sharedMessage": "Compartido a través de la aplicación Wispar",
+    "sharedMessage": "Compartido a través de la aplicación Papercart",
     "@sharedMessage": {
         "description": "Default sharing text."
     },
@@ -143,7 +144,7 @@
         "description": "The message shown when the feed in the home screen is empty. The text had to be split since it contains icons. The full text is: No publications available. Make sure you are following journals by going in the <journal icon> menu and use the <magnifying glass> icon to find journals."
     },
     "zoteroSettings": "Configuración de Zotero",
-    "zoteroPermissions1": "Wispar necesita accesos de lectura y escritura a su cuenta de Zotero para aprovechar su integración.",
+    "zoteroPermissions1": "Papercart necesita accesos de lectura y escritura a su cuenta de Zotero para aprovechar su integración.",
     "zoteroPermissions3": "Una vez creada la clave API, copie el valor y péguelo en el campo de texto de abajo.",
     "zoteroEnterKey": "Introduzca una clave API",
     "@zoteroEnterKey": {
@@ -160,7 +161,7 @@
     "setupSelectInstitution": "Seleccione su institución",
     "setupSelectedInstitution": "Ha seleccionado:",
     "setupLinkZotero": "Vincule su cuenta de Zotero",
-    "setupZoteroLong": "Envíe publicaciones directamente a su biblioteca de Zotero. Se añadirán a una colección especial de Wispar.",
+    "setupZoteroLong": "Envíe publicaciones directamente a su biblioteca de Zotero. Se añadirán a una colección especial de Papercart.",
     "setupLinkMyZotero": "Vincular mi cuenta de Zotero",
     "setupOtherSettings": "Otras opciones",
     "setupOtherSettingsLong": "Puede encontrar ajustes adicionales en el menú de configuración de la aplicación. Acceda desde la pantalla de Inicio, pulsando los tres puntos en la esquina superior derecha.",
@@ -192,7 +193,7 @@
         "description": "Place holder text in the search input widget."
     },
     "appDescription": "Tu aplicación de código abierto para mantenerte al día sobre literatura científica. ¡Preparemos todo!",
-    "welcomeWispar": "¡Bienvenido/a a Wispar!",
+    "welcomeWispar": "¡Bienvenido/a a Papercart!",
     "queries": "Búsquedas",
     "@queries": {
         "description": "Title of the saved search queries tab."
@@ -262,7 +263,7 @@
     "failLoadMorePublication": "No se pudieron cargar más publicaciones.",
     "noSavedQueries": "No se guardó ninguna consulta.",
     "notificationTitleJournal": "Se actualizaron las revistas",
-    "fgNotificationContent": "Wispar funciona en segundo plano para actualizar sus revistas",
+    "fgNotificationContent": "Papercart funciona en segundo plano para actualizar sus revistas",
     "publicationCard": "Tarjeta de publicación",
     "homeFeedEmpty": "No hay publicaciones disponibles. Se añadirán tarjetas de publicación cuando siga al menos una revista.",
     "@homeFeedEmpty": {
@@ -436,5 +437,5 @@
     "overrideUserAgent": "Reemplazar el agente de usuario",
     "customUserAgent": "Personalizar agente de usuario",
     "pleaseEnterModelName": "Por favor, introduce el nombre del modelo de {provider}.",
-    "downloadToAppSubtitle": "Intenta descargar y visualizar el PDF directamente en Wispar para una mejor integración."
+    "downloadToAppSubtitle": "Intenta descargar y visualizar el PDF directamente en Papercart para una mejor integración."
 }

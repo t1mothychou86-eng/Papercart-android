@@ -19,7 +19,10 @@ class DatabaseSettingsScreen extends StatefulWidget {
 }
 
 class DatabaseSettingsScreenState extends State<DatabaseSettingsScreen> {
-  static const platform = MethodChannel('app.wispar.wispar/database_access');
+  // CN: Rename Android only; the native iOS channel remains upstream.
+  static final platform = MethodChannel(Platform.isAndroid
+      ? 'io.github.t1mothychou86.papercart/database_access'
+      : 'app.wispar.wispar/database_access');
   final logger = LogsService().logger;
   final _formKey = GlobalKey<FormState>();
 
@@ -373,8 +376,9 @@ class DatabaseSettingsScreenState extends State<DatabaseSettingsScreen> {
 
       await _showLoadingDialog(AppLocalizations.of(context)!.exportingDatabase);
 
+      // CN: Papercart archive name; keep wispar.db compatible with imports.
       final String outputFile =
-          p.join(outputDirectory, 'wispar_backup_$timestamp.zip');
+          p.join(outputDirectory, 'papercart_backup_$timestamp.zip');
 
       final dbPath = await DatabaseHelper().getDbPath();
       final dbFile = File(dbPath);

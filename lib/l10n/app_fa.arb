@@ -1,5 +1,6 @@
 {
-    "welcomeWispar": "به ویسپار خوش آمدید!",
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
+    "welcomeWispar": "به Papercart خوش آمدید!",
     "appDescription": "با این برنامهٔ متن‌باز، از آخرین مقالات علمی باخبر باشید. سریع راه‌اندازیش می‌کنیم!",
     "setupInstitutionalAccess": "راه اندازی دسترسی از طریق مؤسسه‌ یا دانشگاه شما (اختیاری)",
     "setupSelectInstitution": "دانشگاه یا موسسه مورد نظر خود را انتخاب کنید",

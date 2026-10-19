@@ -1,1 +1,2 @@
-package_name("app.wispar.wispar") # e.g. com.krausefx.app
+# CN: Papercart package; upstream publishing workflows are disabled.
+package_name("io.github.t1mothychou86.papercart") # e.g. com.krausefx.app

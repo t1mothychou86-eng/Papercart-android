@@ -16,7 +16,10 @@ import 'package:path_provider/path_provider.dart';
 import 'package:uuid/uuid.dart';
 
 class DatabaseHelper {
-  static const platform = MethodChannel('app.wispar.wispar/database_access');
+  // CN: Rename Android only; the native iOS channel remains upstream.
+  static final platform = MethodChannel(Platform.isAndroid
+      ? 'io.github.t1mothychou86.papercart/database_access'
+      : 'app.wispar.wispar/database_access');
 
   static Future<String?> resolveBookmarkPath(String? path) async {
     if (path == null) return null;

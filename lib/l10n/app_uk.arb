@@ -1,5 +1,6 @@
 {
-    "welcomeWispar": "Вітаємо у Wispar!",
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
+    "welcomeWispar": "Вітаємо у Papercart!",
     "appDescription": "Застосунгок з відкритим кодом, який допоможе вам слідкувати за сучасною науковою літературою. Давайте все швиденько налаштуємо!",
     "institutionalAccess": "Доступ від інституту",
     "setupInstitutionalAccess": "Налаштувати доступ від інституту",
@@ -254,7 +255,7 @@
     "@homeFeedEmpty": {
         "description": "The message shown when the feed in the home screen is empty."
     },
-    "sharedMessage": "Поділитись через Wispar",
+    "sharedMessage": "Поділитись через Papercart",
     "@sharedMessage": {
         "description": "Default sharing text."
     },
@@ -267,7 +268,7 @@
     "sendToZotero": "Надіслати в Zotero",
     "zoteroError": "Не вдалось надіслати статтю в Zotero. Будь ласка, перегляньте звіт для детальної інформації.",
     "zoteroSettings": "Налаштування Zotero",
-    "zoteroPermissions1": "Wispar потрібен доступ на перегляд та запис вашого профіля Zotero для інтеграції.",
+    "zoteroPermissions1": "Papercart потрібен доступ на перегляд та запис вашого профіля Zotero для інтеграції.",
     "zoteroPermissions2": "При створенні нового API ключа Zotero вам треба \"Надати доступ до бібліотеки\" та \"Надати доступ на запис\".",
     "zoteroPermissions3": "Коли API ключ створно, скопіюйте його значення до текстового поля нижче.",
     "zoteroCreateKey": "Створити новий API ключ",
@@ -327,7 +328,7 @@
     "movingDatabase": "Переміщення файлів бази даних. Зачекайте.",
     "databaseMoved": "Файли бази даних переміщено!",
     "databaseMoveFailed": "Не можливо перемістити файли бази даних: {error}",
-    "databaseConflictTitle": "Знайдені існуючі дані Wispar.",
+    "databaseConflictTitle": "Знайдені існуючі дані Papercart.",
     "numberPublications": "{count, plural, =0{Жодних публікацій} =1{1 публікація} other{{count} публікацій}}",
     "@numberPublications": {
         "placeholders": {
@@ -351,7 +352,7 @@
     "database": "База даних",
     "databaseSettings": "Налаштування бази даних",
     "databaseNotFound": "Файл бази даних не знайдено.",
-    "databaseConflictMessage": "У вибраній теці знайдено дані Wispar. Бажаєте використовувати існуючі файли, чи перезаписати поточною базою даних?",
+    "databaseConflictMessage": "У вибраній теці знайдено дані Papercart. Бажаєте використовувати існуючі файли, чи перезаписати поточною базою даних?",
     "useExistingFiles": "Використовувати існуючі файли",
     "overwriteFiles": "Перезаписати поточною базою даних",
     "privacyPolicy": "Політика конфіденційності",
@@ -452,7 +453,7 @@
     "errorOpeningFile": "Не вдалось відкрити файл.",
     "downloadStarting": "Початок вазантаження.",
     "downloadToApp": "Завантаження в програму",
-    "downloadToAppSubtitle": "Спробувати завантажити та переглянути PDF у Wispar для кращої інтеграції.",
+    "downloadToAppSubtitle": "Спробувати завантажити та переглянути PDF у Papercart для кращої інтеграції.",
     "loginToSyncDevices": "Увійдіть для синхронізації між девайсами",
     "documentation": "Документація",
     "cloudSync": "Синхронізвція через хмару",
@@ -530,7 +531,7 @@
     "worksCount": "Підрахунок робіт",
     "selectStartDate": "Оберіть початкову дату",
     "pleaseEnterBaseUrl": "Будь ласка, введіть базу URL",
-    "syncLongDescription": "Wispar надає можливість синхронізації даних між девайсами. Ви можете скористуватись Wispar Sync (дивіться Політика Конфіденційності) або власним хостингом, для повного контролю даних (дивіться Документація). Ви можете пропустити та продовжити.",
+    "syncLongDescription": "Papercart надає можливість синхронізації даних між девайсами. Ви можете скористуватись Wispar Sync (дивіться Політика Конфіденційності) або власним хостингом, для повного контролю даних (дивіться Документація). Ви можете пропустити та продовжити.",
     "authFailed": "Невдала аутентифікація: {error}",
     "nextMatch": "Наступний збіг",
     "concurrentFetches": "Поточний API запит: {number}",

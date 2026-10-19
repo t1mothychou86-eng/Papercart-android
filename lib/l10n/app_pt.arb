@@ -1,11 +1,12 @@
 {
-    "setupZoteroLong": "Enviar publicações diretamente para sua biblioteca Zotero. Elas serão adicionadas à uma coleção especial no Wispar.",
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
+    "setupZoteroLong": "Enviar publicações diretamente para sua biblioteca Zotero. Elas serão adicionadas à uma coleção especial no Papercart.",
     "articles": "Artigos",
     "@articles": {
         "description": "As in scientific articles."
     },
     "appDescription": "O seu app de código aberto para se manter atualizado com a literatura científica. Vamos configurar o App rapidamente!",
-    "welcomeWispar": "Bem vindo ao Wispar!",
+    "welcomeWispar": "Bem vindo ao Papercart!",
     "setupInstitutionalAccess": "Configurar Acesso Institucional",
     "setupSelectInstitution": "Selecionar minha instituição",
     "setupSelectedInstitution": "Você selecionou:",
@@ -139,14 +140,14 @@
     "noinstitution": "Sem instituição",
     "buildingfeed": "Construindo seu feed. Por favor aguarde…",
     "noPublicationFound": "Nenhuma publicação encontrado.",
-    "sharedMessage": "Compartilhado pelo app Wispar",
+    "sharedMessage": "Compartilhado pelo app Papercart",
     "@sharedMessage": {
         "description": "Default sharing text."
     },
     "shareArticle": "Compartilhar artigo",
     "sendToZotero": "Enviar para Zotero",
     "zoteroSettings": "Configurações do Zotero",
-    "zoteroPermissions1": "Wispar precisa de acesso a leitura e escrita da sua conta Zotero para fazer a integração.",
+    "zoteroPermissions1": "Papercart precisa de acesso a leitura e escrita da sua conta Zotero para fazer a integração.",
     "zoteroPermissions3": "Uma vez que a chave de API é criada, copie o valor e cole-o no campo de texto abaixo.",
     "zoteroCreateKey": "Criar uma nova chave de API",
     "zoteroValidKey": "Chave de API salva!",
@@ -320,7 +321,7 @@
         }
     },
     "notificationSettingsMessage": "As notificações estão permanentemente desativadas. Para habilitar, vá para as configurações de notificação do APP.",
-    "fgNotificationContent": "Wispar está rodando em segundo plano para atualizar as suas revistas",
+    "fgNotificationContent": "Papercart está rodando em segundo plano para atualizar as suas revistas",
     "sort": "Ordenar",
     "zoteroApiKeyEmpty": "A chave da API do zotero ainda não foi configurada. Por favor, configure nas configurações do aplicativo.",
     "zoteroArticleSent": "O artigo foi enviado para o Zotero.",
@@ -404,7 +405,7 @@
     "downloadStarting": "Download iniciado.",
     "downloadFoundPdf": "Baixar PDF encontrado",
     "downloadToApp": "Baixar no aplicativo",
-    "downloadToAppSubtitle": "Tentar baixar e visualizar o PDF diretamente no Wispar para melhor integração.",
+    "downloadToAppSubtitle": "Tentar baixar e visualizar o PDF diretamente no Papercart para melhor integração.",
     "proxyFailure": "O proxy não foi bem-sucedido",
     "proxyLogin": "Esta é uma página de login",
     "editKnownUrl": "Editar URL conhecida",

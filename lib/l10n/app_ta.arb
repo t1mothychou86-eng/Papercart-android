@@ -1,4 +1,5 @@
 {
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
     "home": "வீடு",
     "@home": {
         "description": "The home menu button and the app bar title when in the home screen."
@@ -112,14 +113,14 @@
     "@nopublication3": {
         "description": "The message shown when the feed in the home screen is empty. The text had to be split since it contains icons. The full text is: No publications available. Make sure you are following journals by going in the <journal icon> menu and use the <magnifying glass> icon to find journals."
     },
-    "sharedMessage": "VISPAR பயன்பாடு வழியாக பகிரப்பட்டது",
+    "sharedMessage": "Papercart பயன்பாடு வழியாக பகிரப்பட்டது",
     "@sharedMessage": {
         "description": "Default sharing text."
     },
     "shareArticle": "கட்டுரை பகிர்ந்து கொள்ளுங்கள்",
     "sendToZotero": "சோட்டெரோவுக்கு அனுப்புங்கள்",
     "zoteroSettings": "சோட்டெரோ அமைப்புகள்",
-    "zoteroPermissions1": "உங்கள் சோட்டெரோ கணக்கை அதன் ஒருங்கிணைப்பை அனுபவிக்க VISPAR க்கு அணுகல் மற்றும் எழுத வேண்டும்.",
+    "zoteroPermissions1": "உங்கள் சோட்டெரோ கணக்கை அதன் ஒருங்கிணைப்பை அனுபவிக்க Papercart க்கு அணுகல் மற்றும் எழுத வேண்டும்.",
     "zoteroPermissions2": "புதிய சோட்டெரோ பநிஇ விசையை உருவாக்கும்போது, நீங்கள் \"நூலக அணுகலை அனுமதிக்கவும்\" மற்றும் \"எழுத அணுகலை அனுமதிக்கவும்\" இரண்டையும் தேர்ந்தெடுக்க வேண்டும்.",
     "zoteroPermissions3": "பநிஇ விசை உருவாக்கப்பட்டதும், மதிப்பை நகலெடுத்து கீழே உள்ள உரை புலத்திற்குள் ஒட்டவும்.",
     "zoteroCreateKey": "புதிய பநிஇ விசையை உருவாக்கவும்",
@@ -195,7 +196,7 @@
     },
     "apiFetchInterval": "பநிஇ இடைவெளி",
     "setupAlmostSet": "நீங்கள் அனைவரும் அமைக்கப்பட்டிருக்கிறீர்கள்!… கிட்டத்தட்ட!",
-    "welcomeWispar": "VISPAR க்கு வருக!",
+    "welcomeWispar": "Papercart க்கு வருக!",
     "skip": "தவிர்",
     "getStarted": "தொடங்கவும்",
     "library": "நூலகம்",
@@ -236,7 +237,7 @@
     "setupSelectInstitution": "எனது நிறுவனத்தைத் தேர்ந்தெடுக்கவும்",
     "setupSelectedInstitution": "நீங்கள் தேர்ந்தெடுத்துள்ளீர்கள்:",
     "setupLinkZotero": "இணைப்பு எனவே",
-    "setupZoteroLong": "உங்கள் சோட்டெரோ நூலகத்திற்கு நேரடியாக வெளியீடுகளை அனுப்பவும். அவை ஒரு சிறப்பு VISPAR சேகரிப்பில் சேர்க்கப்படும்.",
+    "setupZoteroLong": "உங்கள் சோட்டெரோ நூலகத்திற்கு நேரடியாக வெளியீடுகளை அனுப்பவும். அவை ஒரு சிறப்பு Papercart சேகரிப்பில் சேர்க்கப்படும்.",
     "setupLinkMyZotero": "எனது சோட்டெரோ கணக்கை இணைக்கவும்",
     "setupOtherSettings": "பிற அமைப்புகள்",
     "homeFeedEmpty": "வெளியீடுகள் எதுவும் கிடைக்கவில்லை. நீங்கள் குறைந்தது ஒரு பத்திரிகையைப் பின்தொடர்ந்தவுடன் வெளியீட்டு அட்டைகள் சேர்க்கப்படும்.",

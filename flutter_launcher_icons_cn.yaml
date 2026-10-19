@@ -1,0 +1,10 @@
+# CN: Android-only Papercart icons; preserve upstream platform icons/config.
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: assets/cn/papercart.png
+  adaptive_icon_foreground: assets/cn/papercart_foreground.png
+  adaptive_icon_background: '#143D46'
+  adaptive_icon_monochrome: assets/cn/papercart_monochrome.png
+  adaptive_icon_foreground_inset: 20
+  min_sdk_android: 21

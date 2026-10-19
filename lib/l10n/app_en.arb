@@ -1,5 +1,6 @@
 {
-  "welcomeWispar": "Welcome to Wispar!",
+  "@@x-cn-branding": "CN: Papercart display branding, A1 (2026-10-19); upstream service names retained.",
+  "welcomeWispar": "Welcome to Papercart!",
   "@welcomeWispar": {},
   "appDescription": "Your open-source app to stay up-to-date with scientific literature. Let's get you set up quickly!",
   "@appDescription": {},
@@ -494,7 +495,7 @@
   "@homeFeedEmpty": {
     "description": "The message shown when the feed in the home screen is empty."
   },
-  "sharedMessage": "Shared via the Wispar app",
+  "sharedMessage": "Shared via the Papercart app",
   "@sharedMessage": {
     "description": "Default sharing text."
   },
@@ -516,7 +517,7 @@
   "@zoteroError":{},
   "zoteroSettings": "Zotero settings",
   "@zoteroSettings": {},
-  "zoteroPermissions1": "Wispar needs both read and write access to your Zotero account to enjoy its integration.",
+  "zoteroPermissions1": "Papercart needs both read and write access to your Zotero account to enjoy its integration.",
   "@zoteroPermissions1": {},
   "zoteroPermissions2": "When creating a new Zotero API key, you must select both \"Allow library access\" and \"Allow write access\".",
   "@zoteroPermissions2": {},
@@ -642,9 +643,9 @@
   "@databaseMoved":{},
   "databaseMoveFailed": "Unable to move the database files: {error}",
   "@databaseMoveFailed":{},
-  "databaseConflictTitle": "Existing Wispar data found.",
+  "databaseConflictTitle": "Existing Papercart data found.",
   "@databaseConflictTitle":{},
-  "databaseConflictMessage": "Wispar data was found in the selected folder. Do you want to use the existing files or overwrite them with the current database?",
+  "databaseConflictMessage": "Papercart data was found in the selected folder. Do you want to use the existing files or overwrite them with the current database?",
   "@databaseConflictMessage":{},
   "useExistingFiles": "Use existing files",
   "@useExistingFiles":{},
@@ -779,10 +780,10 @@
     "downloadStarting": "Download starting.",
     "downloadFoundPdf": "Download found PDF",
     "downloadToApp": "Download in app",
-    "downloadToAppSubtitle": "Attempt to download and view PDF directly in Wispar for better integration.",
+    "downloadToAppSubtitle": "Attempt to download and view PDF directly in Papercart for better integration.",
     "loginToSyncDevices":"Login to sync across devices",
     "@loginToSyncDevices":{},
-    "syncLongDescription":"Wispar offers an optional sync service to keep your data consistent across devices. You can use Wispar Sync (see Privacy Policy) or self-host for full data control (see Documentation). You can also skip sync and continue.",
+    "syncLongDescription":"Papercart offers an optional sync service to keep your data consistent across devices. You can use Wispar Sync (see Privacy Policy) or self-host for full data control (see Documentation). You can also skip sync and continue.",
     "@syncLongDescription":{},
     "documentation":"Documentation",
     "@documentation":{},

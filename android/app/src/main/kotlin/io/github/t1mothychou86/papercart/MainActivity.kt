@@ -1,4 +1,5 @@
-package app.wispar.wispar
+// CN: Papercart package and notification branding (A1).
+package io.github.t1mothychou86.papercart
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -13,8 +14,8 @@ class MainActivity: FlutterActivity() {
         // Create notification channel for foreground service on Android 8.0 and above
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                "wispar_channel",
-                "Wispar Updates",
+                "papercart_channel",
+                "Papercart Updates",
                 NotificationManager.IMPORTANCE_HIGH
             ).apply {
                 description = "Notification when new articles from followed journals and saved queries are available"
