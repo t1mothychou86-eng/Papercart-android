@@ -1,0 +1,98 @@
+# CN: Signed Papercart releases from explicitly published version tags.
+name: Papercart Android release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cn-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Validate signing secrets
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        shell: bash
+        run: |
+          for name in KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_PASSWORD KEY_ALIAS; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Required repository secret $name is missing or empty."
+              exit 1
+            fi
+          done
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '25.0.4.1+1'
+          cache: gradle
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: '3.47.5'
+          cache: true
+      - name: Install native build tool
+        run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - run: flutter pub get
+      - name: Test branding and translation fixes
+        run: flutter test test/cn/ test/services/translations/
+      - name: Restore signing files
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          python3 - <<'PY'
+          import base64
+          import os
+          from pathlib import Path
+
+          os.umask(0o077)
+          store = Path(os.environ['RUNNER_TEMP']) / 'papercart-release.jks'
+          store.write_bytes(base64.b64decode(''.join(os.environ['KEYSTORE_BASE64'].split()), validate=True))
+          def escape(value):
+              # Java Properties uses UTF-16 escapes, including surrogate pairs.
+              raw = value.encode('utf-16-be')
+              return ''.join('\\u' + raw[i:i + 2].hex() for i in range(0, len(raw), 2))
+          values = {'storeFile': str(store),
+                    'storePassword': os.environ['KEYSTORE_PASSWORD'],
+                    'keyPassword': os.environ['KEY_PASSWORD'],
+                    'keyAlias': os.environ['KEY_ALIAS']}
+          Path('android/key.properties').write_text(
+              ''.join(key + '=' + escape(value) + '\n' for key, value in values.items()))
+          PY
+      - name: Build signed APKs
+        run: flutter build apk --release --split-per-abi
+      - name: Remove signing files
+        if: always()
+        run: rm -f android/key.properties "$RUNNER_TEMP/papercart-release.jks"
+      - name: Generate checksums
+        working-directory: build/app/outputs/flutter-apk
+        run: sha256sum app-armeabi-v7a-release.apk app-arm64-v8a-release.apk app-x86_64-release.apk > SHA256SUMS
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          fail_on_unmatched_files: true
+          files: |
+            build/app/outputs/flutter-apk/app-*-release.apk
+            build/app/outputs/flutter-apk/SHA256SUMS
+          body: |
+            Papercart is based on [Wispar by Scriptbash](https://github.com/Scriptbash/Wispar).
+            Distributed under GPL-3.0; original copyright notices are retained.
+            Corresponding source is exactly tag `${{ github.ref_name }}`:
+            [Source tree](https://github.com/${{ github.repository }}/tree/${{ github.ref_name }}) · [Source archive](https://github.com/${{ github.repository }}/archive/refs/tags/${{ github.ref_name }}.tar.gz).
+            Choose the APK matching your device ABI. SHA256SUMS contains SHA-256 checksums.
