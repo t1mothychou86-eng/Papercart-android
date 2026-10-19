@@ -1,3 +1,4 @@
+// CN: Apply A2 upstream fixes (gemini-content-types); see docs/upstream-prs/.
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -176,8 +177,8 @@ class GeminiTranslationProvider {
                       candidate['content']['parts'] is List &&
                       candidate['content']['parts'].isNotEmpty) {
                     for (var part in candidate['content']['parts']) {
-                      if (part.containsKey('text')) {
-                        translatedChunk += part['text'].toString();
+                      if (part is Map && part['text'] is String) {
+                        translatedChunk += part['text'] as String;
                       }
                     }
                   }

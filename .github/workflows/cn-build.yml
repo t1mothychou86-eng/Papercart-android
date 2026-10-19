@@ -1,4 +1,4 @@
-# CN: Papercart debug validation only. Signing and publishing are deferred.
+# CN: Papercart debug validation; signed tag releases use cn-release.yml.
 name: Papercart Android debug
 
 on:
@@ -36,8 +36,8 @@ jobs:
       - name: Install native build tool
         run: sudo apt-get update && sudo apt-get install -y ninja-build
       - run: flutter pub get
-      - name: Test Papercart branding
-        run: flutter test test/cn/
+      - name: Test Papercart branding and translation fixes
+        run: flutter test test/cn/ test/services/translations/
       - run: flutter build apk --debug
       - uses: actions/upload-artifact@v7
         with:

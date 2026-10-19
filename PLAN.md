@@ -31,17 +31,17 @@
   - 本机内存只有 7 GB，如果 Gradle 内存不够，只能通过本地参数调整，不能改动仓库里的 `gradle.properties`。
   - 编译验收：已生成 debug APK，路径、大小与耗时见 `docs/A0-REPORT.md`。
   - [ ] 真机安装与启动（待用户验证）：由用户在安卓真机上安装并能启动（无线 adb 或手动安装均可，步骤见 `docs/DEVICE.md`）。
-- [x] **A1 改名与合规** — 2026-10-19：Papercart 品牌、Android 包名、原创图标、fork 致谢及 debug CI 已完成；analyze 与 A0 的 177 项一致，APK 身份已验证，详见 `docs/A1-REPORT.md`。本次按用户要求暂缓签名 release。
+- [x] **A1 改名与合规** — 2026-10-19：Papercart 品牌、Android 包名、原创图标、fork 致谢及 debug CI 已完成；analyze 与 A0 的 177 项一致，APK 身份已验证，详见 `docs/A1-REPORT.md`。签名 release 补充已完成，见 `docs/A1-RELEASE-REPORT.md`。
   - 新包名（`applicationId` / `namespace`）、App 名称和图标，等用户确定名称后执行。
   - 删除或停用上游专属的配置，例如 `CNAME`、官网和商店发布相关的 workflow。
   - 在 README 开头写明 fork 关系和许可证；“关于”页加上致谢。
   - 新增 GitHub Actions：push 到 `cn` 和 pull_request 时构建 debug APK 并上传 artifact。
-  - CN: 按 A1 本次明确指派范围，tag 签名 release / GitHub Releases 发布暂缓；密钥生成者、保管位置及 Secrets 配置由用户决定，后续另行实施。签名密钥库**不进仓库**。
-- [ ] **A2 上游可合并的修复**（在 `upstream-fix/*` 分支上，每个修复单独一个分支）
+  - [x] **release 签名发布补充** — 2026-10-19：本地三 ABI release 构建及证书验证通过；新增 v* tag 发布 workflow、SHA256SUMS、Secrets 缺失检查和清理步骤；发版与密钥恢复见 `docs/RELEASE.md`。签名材料不进仓库；GitHub 实际发版、真机验证待协调方执行。
+- [x] **A2 上游可合并的修复** — 2026-10-19：三个独立 main 基线补丁与英文 PR 描述已就绪（`docs/upstream-prs/`），同时应用于 cn；20 项新增测试通过，analyze 177 项与基线一致，详见 `docs/A2-REPORT.md`。因 .git 只读，由协调方建立对应 upstream-fix/* 分支。
   1. DeepSeek 和 ChatGPT 的流式解析：`delta.content` 不是字符串时跳过（目前会拼接出 "null"）。
   2. DeepSeek 翻译请求加上 `"thinking": {"type": "disabled"}`；默认模型名从已停用的 `deepseek-chat` 改为官方当前名称（实现前查官方文档确认）。
   3. 每个修复都附带单元测试，并写好英文 PR 描述（`docs/upstream-prs/*.md`），由用户决定何时提交。
-  - 修复同时合并进 `cn` 分支。
+  - 修复同时应用于 `cn` 工作区；Gemini 同类文本转换问题一并修复。旧 DeepSeek 模型名仅在官方端点迁移，第三方端点保留；默认模型以官方当前 API 文档为准。
 - [ ] **A3 接入 PaperCart 工作论文源**
   - 读取 `https://t1mothychou86-eng.github.io/readmobile/data/feed.json`（schema 1），把 NBER、FEDS、ECB、BIS 的工作论文作为可关注的“源”加入信息流。
   - 按 DOI 或 id 去重；离线时读缓存。

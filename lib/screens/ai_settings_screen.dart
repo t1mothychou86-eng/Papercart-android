@@ -1,7 +1,9 @@
+// CN: Apply A2 upstream fixes (deepseek-models); see docs/upstream-prs/.
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wispar/generated_l10n/app_localizations.dart';
 import 'package:wispar/services/translations/deepseek_translation_provider.dart';
+import 'package:wispar/services/translations/deepseek_settings.dart';
 import 'package:wispar/services/translations/gemini_translation_provider.dart';
 import 'package:wispar/services/translations/chatgpt_translation_provider.dart';
 
@@ -82,6 +84,8 @@ class AISettingsScreenState extends State<AISettingsScreen> {
 
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
+    final deepseekModelName = await DeepSeekSettings.loadModelName(prefs);
+    if (!mounted) return;
     setState(() {
       _hideAI = prefs.getBool('hide_ai_features') ?? false;
       _selectedProvider = prefs.getString('ai_provider') ?? _providers.first;
@@ -99,7 +103,7 @@ class AISettingsScreenState extends State<AISettingsScreen> {
       _geminiModelNameController.text =
           prefs.getString('gemini_model_name') ?? 'gemini-2.5-flash';
       _deepseekModelNameController.text =
-          prefs.getString('deepseek_model_name') ?? 'deepseek-chat';
+          deepseekModelName;
       _chatgptModelNameController.text =
           prefs.getString('chatgpt_model_name') ?? 'gpt-4.1-mini';
 
@@ -366,7 +370,7 @@ class AISettingsScreenState extends State<AISettingsScreen> {
                     hintText: _selectedProvider == 'Gemini'
                         ? 'e.g., gemini-2.5-flash'
                         : _selectedProvider == 'DeepSeek'
-                            ? 'e.g., deepseek-chat'
+                            ? 'e.g., deepseek-flash'
                             : _selectedProvider == 'ChatGPT'
                                 ? 'e.g., gpt-4.1-mini'
                                 : '',

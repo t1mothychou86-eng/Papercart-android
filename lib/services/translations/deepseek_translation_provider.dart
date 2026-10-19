@@ -1,8 +1,10 @@
+// CN: Apply A2 upstream fixes (stream-content-types and deepseek-models); see docs/upstream-prs/.
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wispar/services/logs_helper.dart';
+import 'deepseek_settings.dart';
 
 class DeepSeekTranslationProvider {
   String? _apiKey;
@@ -13,7 +15,7 @@ class DeepSeekTranslationProvider {
 
   String _currentBaseUrl = _defaultBaseUrl;
   bool _useCustomBaseUrl = false;
-  String _modelName = 'deepseek-chat';
+  String _modelName = DeepSeekSettings.defaultModel;
   double _temperature = 0.7;
 
   DeepSeekTranslationProvider._privateConstructor();
@@ -25,7 +27,7 @@ class DeepSeekTranslationProvider {
     if (_instance._apiKey == null ||
         (_instance._currentBaseUrl == _defaultBaseUrl &&
             !_instance._useCustomBaseUrl) ||
-        _instance._modelName == 'deepseek-chat') {
+        _instance._modelName == DeepSeekSettings.defaultModel) {
       await _instance._loadSettingsOnDemand();
     }
     return _instance;
@@ -36,7 +38,7 @@ class DeepSeekTranslationProvider {
     _apiKey = prefs.getString('deepseek_api_key');
     _useCustomBaseUrl = prefs.getBool('use_custom_deepseek_base_url') ?? false;
     final storedBaseUrl = prefs.getString('deepseek_base_url');
-    _modelName = prefs.getString('deepseek_model_name') ?? 'deepseek-chat';
+    _modelName = await DeepSeekSettings.loadModelName(prefs);
     _temperature = prefs.getDouble('deepseek_temperature') ?? 0.7;
 
     if (_useCustomBaseUrl &&
@@ -120,6 +122,7 @@ class DeepSeekTranslationProvider {
           {"role": "user", "content": prompt}
         ],
         "model": _modelName,
+        "thinking": {"type": "disabled"},
         "stream": true,
         "temperature": _temperature,
       });
@@ -154,8 +157,8 @@ class DeepSeekTranslationProvider {
                     data['choices'].isNotEmpty) {
                   final choice = data['choices'][0];
                   if (choice.containsKey('delta') &&
-                      choice['delta'].containsKey('content')) {
-                    translatedChunk = choice['delta']['content'].toString();
+                      choice['delta']['content'] is String) {
+                    translatedChunk = choice['delta']['content'] as String;
                   }
                 }
 

@@ -1,0 +1,101 @@
+diff --git a/lib/services/translations/deepseek_translation_provider.dart b/lib/services/translations/deepseek_translation_provider.dart
+--- a/lib/services/translations/deepseek_translation_provider.dart
++++ b/lib/services/translations/deepseek_translation_provider.dart
+@@ -154,8 +154,8 @@
+                     data['choices'].isNotEmpty) {
+                   final choice = data['choices'][0];
+                   if (choice.containsKey('delta') &&
+-                      choice['delta'].containsKey('content')) {
+-                    translatedChunk = choice['delta']['content'].toString();
++                      choice['delta']['content'] is String) {
++                    translatedChunk = choice['delta']['content'] as String;
+                   }
+                 }
+ 
+diff --git a/lib/services/translations/chatgpt_translation_provider.dart b/lib/services/translations/chatgpt_translation_provider.dart
+--- a/lib/services/translations/chatgpt_translation_provider.dart
++++ b/lib/services/translations/chatgpt_translation_provider.dart
+@@ -152,8 +152,8 @@
+                     data['choices'].isNotEmpty) {
+                   final choice = data['choices'][0];
+                   if (choice.containsKey('delta') &&
+-                      choice['delta'].containsKey('content')) {
+-                    translatedChunk = choice['delta']['content'].toString();
++                      choice['delta']['content'] is String) {
++                    translatedChunk = choice['delta']['content'] as String;
+                   }
+                 }
+ 
+diff --git a/test/services/translations/stream_content_test.dart b/test/services/translations/stream_content_test.dart
+new file mode 100644
+--- /dev/null
++++ b/test/services/translations/stream_content_test.dart
+@@ -0,0 +1,68 @@
++import 'dart:convert';
++
++import 'package:flutter_test/flutter_test.dart';
++import 'package:http/http.dart' as http;
++import 'package:http/testing.dart';
++import 'package:shared_preferences/shared_preferences.dart';
++import 'package:wispar/services/translations/chatgpt_translation_provider.dart';
++import 'package:wispar/services/translations/deepseek_translation_provider.dart';
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++
++  for (final provider in ['chatgpt', 'deepseek']) {
++    test('$provider emits only string content from an SSE response', () async {
++      SharedPreferences.setMockInitialValues({'${provider}_api_key': 'test'});
++      final deltas = <Map<String, dynamic>>[
++        {'role': 'assistant'},
++        {'content': null},
++        {'content': 42},
++        {'content': false},
++        {'content': <dynamic>[]},
++        {
++          'content': {'text': 'ignore'}
++        },
++        {'reasoning_content': 'ignore', 'content': null},
++        {'content': ''},
++        {'content': '译文'},
++        {'content': 'null'}, // A literal string must not be filtered out.
++        {}, // Finish delta.
++      ];
++      final body = [
++        ': keepalive',
++        for (final delta in deltas)
++          'data: ${jsonEncode({
++                'choices': [
++                  {'delta': delta}
++                ]
++              })}',
++        'data: ${jsonEncode({'choices': []})}',
++        'data: [DONE]',
++        '',
++      ].join('\n');
++      final client = MockClient((request) async {
++        expect(jsonDecode(request.body)['stream'], isTrue);
++        return http.Response(body, 200,
++            headers: {'content-type': 'text/event-stream; charset=utf-8'});
++      });
++      final chunks = await http.runWithClient(() async {
++        final Stream<String> stream;
++        if (provider == 'chatgpt') {
++          final instance = await ChatgptTranslationProvider.instance;
++          stream = await instance.translateStream(
++              text: 'text',
++              sourceLangName: 'English',
++              targetLangName: 'Chinese');
++        } else {
++          final instance = await DeepSeekTranslationProvider.instance;
++          stream = await instance.translateStream(
++              text: 'text',
++              sourceLangName: 'English',
++              targetLangName: 'Chinese');
++        }
++        return stream.toList();
++      }, () => client);
++      expect(chunks, ['译文', 'null']);
++    });
++  }
++}
