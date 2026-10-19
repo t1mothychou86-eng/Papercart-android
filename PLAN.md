@@ -46,11 +46,32 @@
   - 读取 `https://t1mothychou86-eng.github.io/readmobile/data/feed.json`（schema 1），把 NBER、FEDS、ECB、BIS 的工作论文作为可关注的“源”加入信息流。
   - 按 DOI 或 id 去重；离线时读缓存。
   - 先阅读 Wispar 的 feed 和数据库结构，选择改动最小的接入方式，写入 `docs/DESIGN.md`。
-- [ ] **A4 国内机构访问**
-  - 实测 Wispar 的内置浏览器在安卓上能否跨次启动保持出版商登录（Cookie）。需要用户配合在真机上走一遍 CARSI 登录。
-  - 按出版商生成 WAYFless 直达登录链接：需要学校 CARSI IdP 的 entityID（从 CARSI 联盟元数据里查，**不要猜**）。
-  - WebVPN 网址改写：需要用户提供一个本校 WebVPN 的真实访问网址样例，用来确认改写格式。
-  - 红线：不保存、不处理学校账号或密码，不代为登录。
+- [ ] **A4 国内机构访问**（2026-10-19 决策，调研见 `docs/A4-SPIKE.md`）
+
+  武汉大学共有三条校外访问途径：
+
+  | 途径 | 依据 | 做法 |
+  |---|---|---|
+  | **图书馆 ERSP 网址改写**（主方案） | 用户提供的两个真实网址样例 | 按规则改写网址，在内置浏览器中打开；登录状态记在 `ersp.lib.whu.edu.cn` 这一个域名下，一次登录对各出版商通用 |
+  | **aTrust 系统级 VPN**（第二方案） | 图书馆指南原文：“首次使用需安装 aTrust 客户端” | App 不改写网址，依赖系统级 VPN，需真机验证 |
+  | **CARSI / WAYFless**（暂缓） | 馆方说明 CARSI 只覆盖部分数据库；武大的 IdP entityID 未能从官方元数据核实 | 暂不实现 |
+
+  - **ERSP 改写规则**（由样例推出）：`https://ersp.lib.whu.edu.cn/s/` + 主机名各段倒序、以 `/` 连接 + `/G.<协议>` + 原路径。样例：
+    - `https://www.sciencedirect.com/journal/journal-of-financial-economics/issues` → `https://ersp.lib.whu.edu.cn/s/com/sciencedirect/www/G.https/journal/journal-of-financial-economics/issues`
+    - `https://academic.oup.com/rfs` → `https://ersp.lib.whu.edu.cn/s/com/oup/academic/G.https/rfs`
+  - **还未确认，需真机验证**：http 协议的写法、非默认端口、查询参数的处理、`doi.org` 能否直接经 ERSP 访问、PDF 链接是否也能被改写。
+  - **实现要求**：
+    - 做成通用的“规则型机构访问配置”（参数包括 host、协议标记格式等），与 Wispar 原有的 EZproxy 前缀方式并存。机构选择列表顶部加入“武汉大学（图书馆 ERSP）”和“系统 VPN（不改写，适用于 aTrust）”两项。
+    - 改写只作用于打开文章、在内置浏览器中导航和下载 PDF 的场景。**发送到 Zotero、分享、复制的链接一律使用原始网址**；对已经是 ERSP 格式的网址要能还原。
+    - 已改写的网址不能重复改写。遇到非默认端口或无法解析的网址时，不改写，打开原网址并给出提示。
+    - DOI 链接：先实测 ERSP 能否处理 `doi.org`。不能的话，先只读解析一次 DOI 跳转到的出版商网址（不跟随到全文、不下载），再对出版商网址做改写。
+    - 测试：两个样例、Wiley 等其他主机、http、带端口、带查询参数、重复改写、还原、发送 Zotero 时使用原始网址。
+  - 红线：不保存、不处理学校账号或密码，不代为登录（ERSP 登录完全由用户在内置浏览器中完成）。
+  - 真机验收（用户）：
+    1. 首次打开文章时跳转到武大登录页，登录后能看到全文；
+    2. 关闭 App 再打开，是否还需要重新登录；
+    3. JFE、JF、RFS、JPE、AER 各打开一篇，记录能否看到全文、能否下载 PDF；
+    4. aTrust 方案单独测试，**两种方式不要同时开**（馆方原文提醒）。
 - [ ] **A5（可选）** 接入国内大模型翻译（如通义千问，兼容 OpenAI 接口）、实测国内网络访问各接口的情况、界面中文化查漏。
 
 ## 2. 需要用户提供或决定的事项
@@ -60,7 +81,7 @@
 | ~~GitHub 仓库~~ | 已完成：t1mothychou86-eng/Papercart-android（fork 自 Wispar） |
 | ~~推送权限~~ | 已完成：部署密钥 |
 | ~~App 名称和包名~~ | 已定：名称 **Papercart**，包名 `io.github.t1mothychou86.papercart` |
-| 学校名称（用于查找 CARSI entityID）、一个 WebVPN 网址样例 | A4 |
+| ~~学校与访问方式~~ | 已提供：武汉大学；图书馆 ERSP 样例；`vpn.whu.edu.cn`（aTrust） |
 | 安卓真机测试：安装 APK、配合登录测试 | A0 起 |
 
 ## 3. 风险
