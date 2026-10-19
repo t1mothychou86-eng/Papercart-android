@@ -1,3 +1,4 @@
+import 'package:wispar/services/translations/deepseek_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 import 'dart:convert';
@@ -55,7 +56,7 @@ class ChatScreenState extends State<ChatScreen> {
 
   String _geminiModelName = 'gemini-2.5-flash';
   String _chatgptModelName = 'gpt-4.1-mini';
-  String _deepseekModelName = 'deepseek-chat';
+  String _deepseekModelName = DeepSeekSettings.defaultModel;
 
   bool _useCustomGeminiBaseUrl = false;
   bool _useCustomChatgptBaseUrl = false;
@@ -110,6 +111,7 @@ class ChatScreenState extends State<ChatScreen> {
 
   Future<void> _loadAiSettings() async {
     final prefs = await SharedPreferences.getInstance();
+    await DeepSeekSettings.loadModelName(prefs);
 
     final String loadedGeminiKey = prefs.getString('gemini_api_key') ?? '';
     final String loadedChatgptKey = prefs.getString('chatgpt_api_key') ?? '';
@@ -135,6 +137,8 @@ class ChatScreenState extends State<ChatScreen> {
         prefs.getBool('use_custom_chatgpt_base_url') ?? false;
     final bool loadedUseCustomDeepseekBaseUrl =
         prefs.getBool('use_custom_deepseek_base_url') ?? false;
+
+    if (!mounted) return;
 
     List<String> currentAvailableProviders = [];
     if (loadedGeminiKey.isNotEmpty) {
