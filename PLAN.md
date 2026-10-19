@@ -55,7 +55,7 @@
 
 | 事项 | 何时需要 |
 |---|---|
-| ~~GitHub 仓库~~ | 已完成：t1mothychou86-eng/papercart-android（fork 自 Wispar） |
+| ~~GitHub 仓库~~ | 已完成：t1mothychou86-eng/Papercart-android（fork 自 Wispar） |
 | ~~推送权限~~ | 已完成：部署密钥 |
 | ~~App 名称和包名~~ | 已定：名称 **Papercart**，包名 `io.github.t1mothychou86.papercart` |
 | 学校名称（用于查找 CARSI entityID）、一个 WebVPN 网址样例 | A4 |
