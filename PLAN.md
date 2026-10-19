@@ -22,14 +22,15 @@
 
 ## 1. 里程碑（Codex 按顺序推进，每完成一项就勾选并写一行说明）
 
-- [ ] **A0 工具链与原样编译**
+- [x] **A0 工具链与原样编译** — 2026-10-19：工具链就绪，原样 debug APK 构建成功；上游 analyze/test 失败已记入 `docs/A0-REPORT.md`，真机待用户验证。
   - 在 `~/android-dev/` 下安装 Flutter（版本与 `pubspec.yaml` 中 `environment.flutter` 一致）、JDK（版本参考上游 `.github/workflows/build.yml`）、Android SDK 命令行工具及构建所需组件，并接受许可协议。
   - 不使用 sudo。所有缓存都放在 `~/android-dev/` 下：通过 `PUB_CACHE`、`GRADLE_USER_HOME`、`ANDROID_HOME`、`ANDROID_USER_HOME` 等环境变量指定。
   - 写一个 `scripts/env.sh`，`source` 之后就能使用这套工具链。
   - 在**未修改的上游代码**上执行 `flutter pub get`、`flutter analyze`、`flutter test`，然后执行 `flutter build apk --debug`。
   - 记录：版本号、耗时、APK 路径和大小；`flutter test`、`flutter analyze` 中上游原本就失败的项（如实记录，不修改）。
   - 本机内存只有 7 GB，如果 Gradle 内存不够，只能通过本地参数调整，不能改动仓库里的 `gradle.properties`。
-  - 验收：生成 debug APK。由用户在安卓真机上安装并能启动（无线 adb 或手动安装均可，步骤写进 `docs/DEVICE.md`）。
+  - 编译验收：已生成 debug APK，路径、大小与耗时见 `docs/A0-REPORT.md`。
+  - [ ] 真机安装与启动（待用户验证）：由用户在安卓真机上安装并能启动（无线 adb 或手动安装均可，步骤见 `docs/DEVICE.md`）。
 - [ ] **A1 改名与合规**
   - 新包名（`applicationId` / `namespace`）、App 名称和图标，等用户确定名称后执行。
   - 删除或停用上游专属的配置，例如 `CNAME`、官网和商店发布相关的 workflow。
