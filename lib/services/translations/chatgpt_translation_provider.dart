@@ -152,8 +152,8 @@ class ChatgptTranslationProvider {
                     data['choices'].isNotEmpty) {
                   final choice = data['choices'][0];
                   if (choice.containsKey('delta') &&
-                      choice['delta'].containsKey('content')) {
-                    translatedChunk = choice['delta']['content'].toString();
+                      choice['delta']['content'] is String) {
+                    translatedChunk = choice['delta']['content'] as String;
                   }
                 }
 
